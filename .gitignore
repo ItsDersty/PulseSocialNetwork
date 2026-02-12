@@ -1,0 +1,57 @@
+# Python
+*.pyc
+__pycache__/
+*.$py[cod] # Byte-compiled/optimized files
+*.so       # C extensions
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.whl
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+bin/
+lib/
+include/
+
+# Django
+*.log
+*.pot
+*.sqlite3
+db.sqlite3
+media/  # Or wherever you store user uploads (might need to track for some setups, but usually ignored)
+static/ # Collected static files (generated during deployment)
+
+# IDE specific files (e.g., PyCharm, VS Code)
+.idea/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+.history/
+
+# OS specific files
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Sensitive configuration
+local_settings.py
+.env # Environment variables file
+
+# Migrations - DO NOT IGNORE MIGRATIONS FOLDERS THEMSELVES
+# The migration files (e.g., 0001_initial.py) *must* be tracked by Git to share schema changes with your team.
+# You can ignore the __pycache__ within them, which is covered by the general __pycache__/ rule above.

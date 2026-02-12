@@ -1,0 +1,95 @@
+:root {
+  /* Light Theme */
+  --color-primary: #6EC9F5;
+  --color-background: #F4FBFF;
+  --color-secondary: #A9E1FA;
+  --color-accent: #3FAEE0;
+  --color-text: #1A1A1A;
+
+  /* Site Parameters */
+  --corner-primary: 24px;
+  --corner-secondary: 16px;
+  --corner-three: 8px;
+
+  --default-padding: 8px;
+  --big-padding: 16px;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --color-primary: #6EC9F5;
+  --color-background: #0F1620;
+  --color-secondary: #4A90B5;
+  --color-accent: #89D6FF;
+  --color-text: #E6EDF2;
+}
+
+body {
+    display: flex;
+    background-color: var(--color-background);
+
+    font-family: 'Inter', sans-serif;
+
+}
+
+.PageBlock {
+    margin: 8px;
+    /*background-color: var(--color-secondary);*/
+    border-radius: var(--corner-primary);
+    display: flex;
+    flex-direction: column;
+    padding: var(--default-padding);
+    height: max-content;
+}
+
+#SideBar {
+    min-width: 256px;
+    max-width: 256px;
+    position: fixed;
+}
+
+#SideBar a {
+    width: 100%;
+    height: 48px;
+    margin-bottom: var(--default-padding);
+    border-radius: var(--corner-secondary);
+    background: var(--color-secondary);
+
+    display: flex;
+    align-items: center;   /* вертикально */
+    justify-content: left; /* опционально: горизонтально */
+    padding-left: 8px;
+
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: 18px;
+}
+
+#SideBar a .material-symbols-rounded {
+    fill: var(--color-text);
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    font-size: 32px;
+    user-select: none;
+}
+
+
+#MainContent {
+    margin-left: 294px;
+    width: -webkit-fill-available;
+    /*background-color: var(--color-secondary);*/
+    padding: var(--big-padding);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+.postCard {
+    width: 100%;
+    padding: var(--default-padding);
+    background-color: var(--color-secondary);
+    border-radius: var(--corner-secondary);
+}
