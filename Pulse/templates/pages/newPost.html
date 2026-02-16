@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        
+        <!-- Контейнер для превью -->
+        <div id="preview-container" class="row g-2 mt-2 mb-3"></div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Опубликовать</button>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript для магии -->
+<script>
+    // Находим инпут (Django Crispy обычно дает ID по имени поля: id_files)
+    const fileInput = document.querySelector('input[type="file"]');
+    const previewContainer = document.getElementById('preview-container');
+
+    fileInput.addEventListener('change', function() {
+        previewContainer.innerHTML = ''; // Очистить старое превью
+        const files = this.files;
+
+        if (files) {
+            [...files].forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const col = document.createElement('div');
+                    col.className = 'col-4'; // По 3 картинки в ряд
+                    
+                    // Если это видео
+                    if (file.type.startsWith('video/')) {
+                        col.innerHTML = `
+                            <video src="${e.target.result}" class="img-fluid rounded border" style="height: 100px; width: 100%; object-fit: cover;"></video>
+                        `;
+                    } else { // Если картинка
+                        col.innerHTML = `
+                            <img src="${e.target.result}" class="img-fluid rounded border" style="height: 100px; width: 100%; object-fit: cover;">
+                        `;
+                    }
+                    previewContainer.appendChild(col);
+                }
+                reader.readAsDataURL(file);
+            });
+        }
+    });
+</script>
+{% endblock %}
