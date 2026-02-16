@@ -34,7 +34,6 @@ include/
 *.sqlite3
 db.sqlite3
 media/  # Or wherever you store user uploads (might need to track for some setups, but usually ignored)
-static/ # Collected static files (generated during deployment)
 
 # IDE specific files (e.g., PyCharm, VS Code)
 .idea/
