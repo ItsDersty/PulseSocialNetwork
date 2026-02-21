@@ -15,7 +15,7 @@
   --big-padding: 16px;
 }
 
-[data-theme="dark"] {
+html[data-bs-theme="dark"] {
   /* Dark Theme */
   --color-primary: #6EC9F5;
   --color-background: #0F1620;
@@ -43,11 +43,15 @@ body {
 }
 
 #SideBar {
-    min-width: 256px;
-    max-width: 256px;
-    position: fixed;
+    position:fixed;
+    height: -webkit-fill-available;
 }
 
+#SideBar .icon {
+    vertical-align: sub;
+}
+
+/* deprecated style, was used in old sidebar
 #SideBar a {
     width: 100%;
     height: 48px;
@@ -56,8 +60,8 @@ body {
     background: var(--color-secondary);
 
     display: flex;
-    align-items: center;   /* вертикально */
-    justify-content: left; /* опционально: горизонтально */
+    align-items: center;
+    justify-content: left;
     padding-left: 8px;
 
     text-decoration: none;
@@ -72,7 +76,7 @@ body {
     margin-right: 8px;
     font-size: 32px;
     user-select: none;
-}
+} */
 
 
 #MainContent {

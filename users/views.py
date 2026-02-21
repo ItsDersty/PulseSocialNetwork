@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
+from django.contrib.auth import get_user_model
+
+Users=get_user_model()
 
 def register(request):
     if request.method == 'POST':
@@ -9,4 +12,9 @@ def register(request):
             return redirect('login') # Перенаправление на страницу входа
     else:
         form = RegisterForm()
-    return render(request, 'pages/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form})
+
+def viewUser(request,id):
+    if request.method == "GET":
+        profile = Users.objects.get(id=id)
+        return render(request,'users/userPage.html', {'profile': profile})

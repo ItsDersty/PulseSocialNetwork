@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 AUTH_USER_MODEL = 'users.PulseUser'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/users/login'
 
 # Application definition
 

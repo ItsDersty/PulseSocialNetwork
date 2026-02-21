@@ -1,0 +1,9 @@
+{% extends "templates/base.html" %}
+{% block content %}
+{% load humanize %}
+<div style="gap: 8px; display: flex; flex-direction: column-reverse;">
+    {% for post in posts %}
+        {% include "posts/postElement.html" with post=post %}
+    {% endfor %}
+</div>
+{% endblock %}
