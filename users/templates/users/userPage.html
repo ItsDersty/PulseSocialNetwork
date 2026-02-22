@@ -1,12 +1,25 @@
 {% extends "templates/base.html" %}
 {% block content %}
 {% load humanize %}
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
+<div class="card">
+  <img src="/static/banner.webp" class="card-img-top" alt="...">
+  <img src="/static/pfp.webp" class="" alt="..." style="
+    position: relative;
+    width: 128px;
+    height: 128px;
+    border-radius: 100%;
+    top: -64px;
+    left: 32px;
+">
+  <div class="card-body" style="margin-top: -64px;">
     <h5 class="card-title">{{ profile.username }}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <p class="card-text">{{ profile.bio }}</p>
+
+    {% if profile.id == user.id %}
+      <a href="/users/edit/" class="btn btn-outline-primary">Edit</a>
+    {% else %}
+        <a href="#" class="btn btn-primary">Follow</a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
