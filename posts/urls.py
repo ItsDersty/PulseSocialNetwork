@@ -6,4 +6,7 @@ from . import views
 urlpatterns = [
     path('new/', views.newPost, name='newPost'),
     path('<int:id>',views.viewPost,name="postPage"),
+
+    #API
+    path('api/like/<int:id>',views.likePost),
 ]

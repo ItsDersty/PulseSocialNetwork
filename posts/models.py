@@ -8,6 +8,10 @@ class Post(models.Model):
     )
     content = models.TextField(max_length=280)
     created_at = models.DateTimeField(auto_now_add=True)
+    likes=models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='likedPosts')
+    parent=models.ForeignKey('self',null=True,blank=True,related_name='replies',on_delete=models.SET_NULL)
+    isReply=models.BooleanField(default=False)
+
 
 class PostMedia(models.Model):
     # Связываем медиа с постом

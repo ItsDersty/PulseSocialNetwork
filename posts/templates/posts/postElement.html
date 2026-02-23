@@ -3,16 +3,22 @@
         <!-- Header: автор и дата -->
         <div class="card-header d-flex align-items-center gap-2">
             <!-- Аватар автора, если есть -->
-            <img src="#" alt="Avatar" class="rounded-circle" width="40" height="40">
+            <a href="/users/{{post.author.id}}"><img src="/static/pfp.webp" class="rounded-circle shadow-sm" width="40" height="40"></a>
             <div>
-                <h6 class="mb-0">{{ post.author.username }}</h6>
+                <a href="/users/{{post.author.id}}" class="link-body-emphasis" style="text-decoration: none;"><h6 class="mb-0">{{ post.author.username }}</h6></a>
                 <small class="text-muted">{{ post.created_at|naturaltime }}</small>
             </div>
         </div>
 
         <!-- Основной контент -->
         <div class="card-body">
+            {% if post.parent and not hideParentPost %}
+                {% include "posts/postElement.html" with post=post.parent hideButtons=True %}
+                <hr>
+            {% endif %}
+            <a href="/posts/{{post.id}}" style="text-decoration: none;" class="link-body-emphasis">
             <p class="card-text fs-4">{{ post.content }}</p>
+            </a>
 
             <!-- Превью медиа, если есть -->
             <!--there's no media logic, so don't need for now
@@ -31,8 +37,15 @@
         </div>
 
         <!-- Footer: кнопки действий -->
+        {% if not hideButtons %}
         <div class="card-footer d-flex gap-3">
-            <button class="btn btn-outline-primary btn-sm">Like</button>
-            <button class="btn btn-outline-secondary btn-sm">Comment</button>
+            <button data-post-id="{{ post.id }}" class="btn btn-outline-primary btn-sm like-btn"><span class="like-count" style="font-size: 20px;">{{post.likes.count}}</span><span class="material-symbols-rounded ms-2" style="vertical-align: sub;">favorite</span></button>
+
+            {% if original %}
+                <button id="commentButton" class="btn btn-outline-primary btn-sm"><span style="font-size: 20px;">{{post.replies.count}}</span><span class="material-symbols-rounded ms-2" style="vertical-align: sub;">comment</span></button>
+            {% else %}
+                <a href="/posts/{{post.id}}?reply" class="btn btn-outline-primary btn-sm"><span style="font-size: 20px;">{{post.replies.count}}</span><span class="material-symbols-rounded ms-2" style="vertical-align: sub;">comment</span></a>
+            {% endif %}
         </div>
+        {% endif %}
     </div>
