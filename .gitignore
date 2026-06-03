@@ -54,3 +54,5 @@ local_settings.py
 # Migrations - DO NOT IGNORE MIGRATIONS FOLDERS THEMSELVES
 # The migration files (e.g., 0001_initial.py) *must* be tracked by Git to share schema changes with your team.
 # You can ignore the __pycache__ within them, which is covered by the general __pycache__/ rule above.
+.hf_cache
+venv12

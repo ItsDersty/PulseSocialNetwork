@@ -1,23 +1,27 @@
 from django.db import models
-from django.conf import settings # Импортируем настройки
+from django.conf import settings  # Импортируем настройки
+from django_neural_feed.mixins import NeuralRecommendMixin
 
-class Post(models.Model):
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE
-    )
+
+class Post(NeuralRecommendMixin, models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.TextField(max_length=280)
     created_at = models.DateTimeField(auto_now_add=True)
-    likes=models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='likedPosts')
-    parent=models.ForeignKey('self',null=True,blank=True,related_name='replies',on_delete=models.SET_NULL)
-    isReply=models.BooleanField(default=False)
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="likedPosts")
+    parent = models.ForeignKey(
+        "self", null=True, blank=True, related_name="replies", on_delete=models.SET_NULL
+    )
+    isReply = models.BooleanField(default=False)
+
+    def get_ready_text(self):
+        return f"passage: {self.content}"
 
 
 class PostMedia(models.Model):
     # Связываем медиа с постом
-    post = models.ForeignKey(Post, related_name='media', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name="media", on_delete=models.CASCADE)
     # Поле для файла (картинка или видео)
-    file = models.FileField(upload_to='posts_media/')
-    
+    file = models.FileField(upload_to="posts_media/")
+
     # Можно добавить тип, чтобы отличать фото от видео в шаблоне
     is_video = models.BooleanField(default=False)
