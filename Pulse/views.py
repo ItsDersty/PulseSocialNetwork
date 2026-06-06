@@ -9,24 +9,11 @@ def index(request):
     posts = Post.objects.all()
     return render(request,"Pulse/index.html",{'posts': posts})
  """
-from django_neural_feed.services import RecommendationService
-from posts.models import Post
+from Pulse.feeds import PostFeed
 
 
 def index(request):
-    # Get IDs of items to exclude (e.g., dislikes or hidden posts)
-    excluded_ids = []
-
-    # Get user's active likes to calculate interests
-    user_likes = request.user.likedPosts.all()
-
-    feed_queryset = RecommendationService.get_feed_for_user(
-        user=request.user,
-        model_class=Post,
-        queryset=Post.objects.all(),
-        likes_queryset=user_likes,
-        excluded_ids=excluded_ids,
-        limit=20,
+    feed_queryset = PostFeed.get_feed(
+        user=request.user, queryset=Post.objects.all(), excluded_ids=[], limit=20
     )
-
     return render(request, "Pulse/index.html", {"posts": feed_queryset})

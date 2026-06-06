@@ -63,6 +63,8 @@ INSTALLED_APPS = [
 from django.db.models import ExpressionWrapper, FloatField, F, Func
 from django.utils.timezone import now
 
+DJANGO_NEURAL_FEED = {"FEEDS": ["Pulse.feeds.PostFeed"]}
+
 DNF_CONFIG = {
     "CELERY_ENABLED": False,
     "USER_LIKES_LIMIT": 30,
