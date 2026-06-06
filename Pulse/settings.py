@@ -61,7 +61,7 @@ INSTALLED_APPS = [
 ]
 
 from django.db.models import ExpressionWrapper, FloatField, F, Func
-from django.db.models.functions import Now
+from django.utils.timezone import now
 
 DNF_CONFIG = {
     "CELERY_ENABLED": False,
@@ -76,7 +76,7 @@ DNF_CONFIG = {
             1.0
             + (
                 Func(
-                    Now() - F("created_at"),
+                    now() - F("created_at"),
                     template="EXTRACT(EPOCH FROM %(expressions)s)",
                 )
                 / 86400.0
