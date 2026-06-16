@@ -63,14 +63,18 @@ INSTALLED_APPS = [
 from django.db.models import ExpressionWrapper, FloatField, F, Func
 from django.utils.timezone import now
 
-DJANGO_NEURAL_FEED = {"FEEDS": ["Pulse.feeds.PostFeed"]}
+DJANGO_NEURAL_FEED = {
+    "FEEDS": [
+        "Pulse.feeds.PostFeed",  # DNF hooks up all model and M2M signals automatically
+    ],
+}
 
-DNF_CONFIG = {
+DJANGO_NEURAL_FEED2 = {
     "CELERY_ENABLED": False,
     "USER_LIKES_LIMIT": 30,
     "MODEL_NAME": "paraphrase-multilingual-MiniLM-L12-v2",
-    "WEIGHT_SIMILARITY": 0.6,
-    "WEIGHT_FRESHNESS": 0.4,
+    "WEIGHT_SIMILARITY": 1.0,
+    "WEIGHT_FRESHNESS": 0.0,
     "WEIGHT_POPULARITY": 0.0,
     "FRESHNESS_EXPRESSION": ExpressionWrapper(
         1.0

@@ -11,9 +11,23 @@ def index(request):
  """
 from Pulse.feeds import PostFeed
 
+import time
+
 
 def index(request):
+    alpha_time = time.perf_counter()
+    # Gather IDs of posts the user has already liked to exclude them from the feed
+    excluded_ids = Post.objects.filter(likes=request.user).values_list("id", flat=True)
+
+    # Generate personalized recommendations directly via your Feed class
     feed_queryset = PostFeed.get_feed(
-        user=request.user, queryset=Post.objects.all(), excluded_ids=[], limit=20
+        user=request.user,
+        queryset=Post.objects.all(),
+        excluded_ids=excluded_ids,
+        limit=20,
     )
-    return render(request, "Pulse/index.html", {"posts": feed_queryset})
+
+    delta_time = time.perf_counter() - alpha_time
+    return render(
+        request, "Pulse/index.html", {"posts": feed_queryset, "delta_time": delta_time}
+    )

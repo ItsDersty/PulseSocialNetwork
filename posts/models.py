@@ -1,5 +1,5 @@
 from django.db import models
-from django.conf import settings  # Импортируем настройки
+from django.conf import settings
 from django_neural_feed.mixins import NeuralRecommendMixin
 
 
@@ -14,14 +14,11 @@ class Post(NeuralRecommendMixin, models.Model):
     isReply = models.BooleanField(default=False)
 
     def get_ready_text(self):
-        return f"passage: {self.content}"
+        return f"{self.content}"
 
 
 class PostMedia(models.Model):
-    # Связываем медиа с постом
     post = models.ForeignKey(Post, related_name="media", on_delete=models.CASCADE)
-    # Поле для файла (картинка или видео)
     file = models.FileField(upload_to="posts_media/")
 
-    # Можно добавить тип, чтобы отличать фото от видео в шаблоне
     is_video = models.BooleanField(default=False)

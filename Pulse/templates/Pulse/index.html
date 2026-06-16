@@ -1,6 +1,7 @@
 {% extends "templates/base.html" %}
 {% block content %}
 {% load humanize %}
+<h3>Generated feed in {{ delta_time }} seconds</h3>
 <div style="gap: 2em; display: flex; flex-direction: column;">
     {% for post in posts %}
         {% include "posts/postElement.html" with post=post %}
