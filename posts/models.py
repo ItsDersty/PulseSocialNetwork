@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django_neural_feed.mixins import NeuralRecommendMixin
+from django_neural_feed.mixins import NeuralRecommendMixin, NeuralHnswMixin
 
 
 class Post(NeuralRecommendMixin, models.Model):
@@ -15,6 +15,10 @@ class Post(NeuralRecommendMixin, models.Model):
 
     def get_ready_text(self):
         return f"{self.content}"
+
+    # Explicitly inherit Meta options from the HNSW mixin
+    class Meta(NeuralRecommendMixin.Meta, NeuralHnswMixin.Meta):
+        pass
 
 
 class PostMedia(models.Model):

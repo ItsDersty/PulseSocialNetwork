@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "django.contrib.postgres",
     "django_cleanup.apps.CleanupConfig",
     "crispy_forms",
     "crispy_bootstrap5",
@@ -67,8 +68,14 @@ DJANGO_NEURAL_FEED = {
     "FEEDS": [
         "Pulse.feeds.PostFeed",  # DNF hooks up all model and M2M signals automatically
     ],
+    "HNSW": {
+        "ENABLED": True,
+        "EF_SEARCH": 40,
+        "SEARCH_POOL": 500,
+    },
 }
 
+"""not longer used
 DJANGO_NEURAL_FEED2 = {
     "CELERY_ENABLED": False,
     "USER_LIKES_LIMIT": 30,
@@ -90,7 +97,13 @@ DJANGO_NEURAL_FEED2 = {
         ),
         output_field=FloatField(),
     ),
+    "HNSW": {
+        "ENABLED": True,
+        "EF_SEARCH": 40,
+        "SEARCH_POOL": 500,
+    },
 }
+"""
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"

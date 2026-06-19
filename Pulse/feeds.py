@@ -45,10 +45,3 @@ class PostFeed(BaseNeuralFeed):
         / (Value(1.0) + (Extract(Now() - F("created_at"), "epoch") / 3600.0)),
         output_field=FloatField(),
     )
-
-    hnsw_config = {
-        "ENABLED": False,
-        "M": 16,  # Max connections per layer (default for pgvector)
-        "EF_CONSTRUCTION": 64,  # Size of the dynamic candidate list for construction
-        "OP_CLASS": "inner_product",  # Index type (cosine, l2, or inner_product)
-    }
